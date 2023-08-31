@@ -1,9 +1,9 @@
-CREATE DATABASE epytodo
+CREATE DATABASE IF NOT EXISTS epytodo;
 
 use epytodo;
 
-CREATE TABLE user
-{
+CREATE TABLE IF NOT EXISTS user
+(
  id bigint NOT NULL AUTO_INCREMENT,
  email varchar(255) UNIQUE NOT NULL,
  password varchar(255) UNIQUE NOT NULL,
@@ -11,16 +11,16 @@ CREATE TABLE user
  firstname varchar(255) NOT NULL,
  created_at datetime NOT NULL DEFAULT NOW(),
  CONSTRAINT t_id PRIMARY KEY (id)
-};
+);
 
-CREATE TABLE todo
-{
+CREATE TABLE IF NOT EXISTS todo
+(
  id bigint NOT NULL AUTO_INCREMENT,
  title varchar(255) NOT NULL,
  description text NOT NULL,
  created_at datetime NOT NULL DEFAULT NOW(),
  due_time datetime NOT NULL,
  status varchar(255) NOT NULL,
- user_id bigint unisgned NOT NULL,
- CONSTRAINT t_id PRIMARY KEY (id),
-};
+ user_id bigint unsigned NOT NULL,
+ CONSTRAINT t_id PRIMARY KEY (id)
+);

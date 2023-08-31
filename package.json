@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,16 @@
   "bugs": {
     "url": "https://github.com/SamuelSgn/DEV_WEB/issues"
   },
-  "homepage": "https://github.com/SamuelSgn/DEV_WEB#readme"
+  "homepage": "https://github.com/SamuelSgn/DEV_WEB#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.3.1",
+    "email-check": "^1.1.0",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "jsonwebtoken": "^9.0.1",
+    "mysql2": "^3.6.0",
+    "nodemon": "^3.0.1"
+  }
 }

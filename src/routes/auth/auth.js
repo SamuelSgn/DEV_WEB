@@ -7,7 +7,9 @@ const bcrypt = require('bcrypt');
 let jwt = require('jsonwebtoken');
 let global = '';
 
-Roads.use(body());
+Roads.use(body.urlencoded({extended: true}));
+Roads.use(body.json());
+
 Roads.post('/signup', checkEmail, checkEmailExists, checkPassword, (req, res) => {
     res.send('Account created successfully');
 });
@@ -39,13 +41,14 @@ Roads.post('/register', checkEmailExists, function(req, res) {
     });
 });
 
-Roads.post('/auth', authToken, function(req, res){
+Roads.post('/auth', authToken, function(req, res) {
     let user_identity = {
         name: req.name,
         id: req.id,
-        email: req.email
+        email: req.email,
+        firstname: req.firstname
     }
-    res.json({ message: user_identity.name + ' is connected'});
+    res.json({ message: user_identity.name + user_identity.firstname + ' is connected'});
 });
 
 Roads.post('/login', LoginUser, function(req, res) {
@@ -57,8 +60,19 @@ Roads.post('/login', LoginUser, function(req, res) {
         id: req.id,
         email: req.email
     }
-    let token = jwt.sign(identity, "kitchen");
+    let token = jwt.sign(identity, "ayasecret");
     res.status(200).json({token});
+});
+
+Roads.get('/User', authToken, function(req, res) {
+    const query_connect = `SELECT * FROM user WHERE id = '${req.id}`;
+    connection.query(query_connect, [req.id], (err, result) => {
+        if (err) {
+            res.send(err)
+        } else {
+            res.send(result[0].email);
+        }
+    });
 });
 
 module.exports = Roads;

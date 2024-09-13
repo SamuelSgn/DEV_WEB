@@ -43,7 +43,6 @@ function checkPassword(req, res, next){
 function checkEmailExists(req, res, next){
     const query_mail = `SELECT * FROM user WHERE email = '${req.body.email}'`;
     connection.query(query_mail, [req.body.email], (err, result) => {
-        
         if (err){
             res.send(err);
         } else {
@@ -85,7 +84,7 @@ function LoginUser(req, res, next){
 function authToken(req, res, next){
     try{
         const token = req.headers.authorization.split(' ')[1];
-        const response = jwd.verify(token, "kitchen");
+        const response = jwd.verify(token, "ayasecret");
         req.name = response.name;
         req.id = response.id;
         req.email = response.email;

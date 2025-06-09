@@ -60,7 +60,7 @@ Roads.post('/login', LoginUser, function(req, res) {
         id: req.id,
         email: req.email
     }
-    let token = jwt.sign(identity, "ayasecret");
+    let token = jwt.sign(identity, process.env.SECRET_KEY);
     res.status(200).json({token});
 });
 
@@ -70,7 +70,7 @@ Roads.get('/User', authToken, function(req, res) {
         if (err) {
             res.send(err)
         } else {
-            res.send(result[0].email);
+            res.send(result[0].email); 
         }
     });
 });

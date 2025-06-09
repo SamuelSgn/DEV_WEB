@@ -1,0 +1,50 @@
+.Navbar {
+    display: flex;
+    /* border: 5px solid orange; */
+    /* border-radius: 2px; */
+    background-color: black;
+    height: 10vh;
+    padding: 10px 20px;
+    justify-content: space-between;
+}
+
+.Navbar .leftSide img {
+    /* border: solid green; */
+    width: 5vw;
+    margin-left: 5vw;
+    margin-top: 1vh;
+}
+
+.Navbar .leftSide p {
+    /* border: solid blueviolet; */
+    margin-left: 20vw;
+    margin-top: -7vh;
+    color: aqua;
+    font-size: 50px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.Navbar .rightSide {
+    /* border: solid red; */
+    margin-left: 20vw;
+    padding: 2vw;
+    display: flex;
+    flex: 25%;
+    color: aqua;
+    height: 10%;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.Navbar .rightSide > * {
+    margin-right: 4vw;
+    align-items: center;
+}
+
+.Navbar .rightSide > a {
+    text-decoration: none;
+    color: aqua;
+    background-color: gray;
+    border: 1vw solid transparent;
+}

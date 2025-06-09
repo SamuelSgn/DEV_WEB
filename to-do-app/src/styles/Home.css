@@ -1,0 +1,17 @@
+.Home-container {
+    background-color: aqua;
+    background-image: url('../assets/Screenshot from 2024-11-11 13-58-05.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* margin-bottom: 75vh; */
+}
+
+.Hold-page .slogan {
+    justify-content: center;
+    margin-left: 35vw;
+    margin-top: 80vh;
+    /* margin-bottom: 45vh; */
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+    font-weight: bold;
+}

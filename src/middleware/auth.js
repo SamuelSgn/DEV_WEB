@@ -4,14 +4,14 @@ const jwd = require('jsonwebtoken');
 const connection = require("../config/db");
 const encrypt = require('bcrypt');
 
-function isValidEmail(email){
+function isValidEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
 }
 
-function checkEmail(req, res, next){
-    const mail= isValidEmail(req.body.email);
-    if (mail){
+function checkEmail(req, res, next) {
+    const mail = isValidEmail(req.body.email);
+    if (mail) {
         next();
     } else {
         res.send("Invalid email");
@@ -22,7 +22,7 @@ function checkstring(str){
     return /^[A-Za-z0-9]*$/.test(str);
 }
 
-function isValidPassword(password){
+function isValidPassword(password) {
     let isValid = checkstring(password);
     if (password.length >= 8 && isValid === true) {
         return true;
@@ -43,7 +43,7 @@ function checkPassword(req, res, next){
 function checkEmailExists(req, res, next){
     const query_mail = `SELECT * FROM user WHERE email = '${req.body.email}'`;
     connection.query(query_mail, [req.body.email], (err, result) => {
-        if (err){
+        if (err) {
             res.send(err);
         } else {
             if (result.length > 0) {
@@ -51,7 +51,7 @@ function checkEmailExists(req, res, next){
             } else {
                 next();
             }
-        } 
+        }
     });
 }
 
@@ -82,14 +82,14 @@ function LoginUser(req, res, next){
 }
 
 function authToken(req, res, next){
-    try{
+    try {
         const token = req.headers.authorization.split(' ')[1];
-        const response = jwd.verify(token, "ayasecret");
+        const response = jwd.verify(token, process.env.SECRET_KEY);
         req.name = response.name;
         req.id = response.id;
         req.email = response.email;
         next();
-    } catch {
+    } catch (err) {
         res.status(401).json({message: "Invalid token authorization"});
     }
 }

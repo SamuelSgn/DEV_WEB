@@ -1,0 +1,18 @@
+services:
+  db:
+    image: mysql:8.4
+    container_name: task-manager-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:-root}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE:-epytodo}"
+      MYSQL_USER: "${MYSQL_USER:-task_manager}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD:-task_manager}"
+    ports:
+      - "${MYSQL_PORT:-3307}:3306"
+    volumes:
+      - task_manager_mysql_data:/var/lib/mysql
+      - ./epytodo.sql:/docker-entrypoint-initdb.d/01-epytodo.sql:ro
+
+volumes:
+  task_manager_mysql_data:
+

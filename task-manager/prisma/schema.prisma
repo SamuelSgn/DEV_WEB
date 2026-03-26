@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -16,6 +16,7 @@ model User {
   createdAt  DateTime @default(now()) @map("created_at")
 
   todos      Todo[]
+  notes      Note[]
 
   @@map("user")
 }
@@ -33,5 +34,18 @@ model Todo {
 
   @@index([userId])
   @@map("todo")
+}
+
+model Note {
+  id        BigInt   @id @default(autoincrement()) @db.BigInt
+  title     String
+  content   String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+  userId    BigInt   @map("user_id") @db.BigInt
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("note")
 }
 
